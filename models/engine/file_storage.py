@@ -57,3 +57,8 @@ class FileStorage:
         """delete obj from __objects if it’s inside"""
         if obj is not None:
             del self.__objects[obj.__class__.__name__ + '.' + obj.id]
+
+
+    def close(self):
+        """Reset the use of data"""
+        self.reload()
