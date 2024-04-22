@@ -2,15 +2,16 @@
 """New engine database storage"""
 
 from os import getenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
+from models.review import Review
 from models.amenity import Amenity
 from models.city import City
 from models.place import Place
 from models.state import State
-from models.review import Review
 from models.user import User
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+
 
 
 class DBStorage:
@@ -42,7 +43,7 @@ class DBStorage:
         """Return a dectionary"""
         dic = {}
         if type(cls) == str:
-            cls = class_dict.get(cls, None)
+            cls = self.class_dict.get(cls, None)
         if cls:
             for obj in self.__session.query(cls):
                 dic[obj.__class__.__name__ + '.' + obj.id] = obj
